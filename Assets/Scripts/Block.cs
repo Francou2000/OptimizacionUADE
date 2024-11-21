@@ -4,15 +4,38 @@ using UnityEngine;
 
 public class Block : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] int HitstoDestroy;
+    [SerializeField] int CurrentHits;
+    [SerializeField] GameObject PowerUp;
+    [SerializeField] public int Points;
+
+
     void Start()
     {
-        
+        CurrentHits = HitstoDestroy;
     }
 
-    // Update is called once per frame
-    void Update()
+
+
+    public void OnHit()
     {
-        
+        CurrentHits--;
+        if (CurrentHits <= 0)
+        {
+            if (PowerUp)
+            {
+                GameObject powerUP = Instantiate(PowerUp, this.transform.position, PowerUp.transform.rotation);
+                GameManager.instance.AddToUpdateList(powerUP.GetComponent<MultiBall>());
+            }
+            DestroyBlock();
+            Destroy(this.gameObject);
+        }
     }
+
+    void DestroyBlock()
+    {
+        GameManager.instance.BlockDestroyed(this, Points);
+
+    }
+
 }

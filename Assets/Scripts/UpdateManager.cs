@@ -4,15 +4,35 @@ using UnityEngine;
 
 public class UpdateManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] public List<IUpdateable> updateables = new List<IUpdateable>();
+    [SerializeField] int a;
+    public bool isplaying;
+
     void Start()
     {
-        
+        isplaying = true;
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        
+        if (isplaying)
+        {
+            var count = updateables.Count;
+            for (int i = 0; i < count; i++)
+            {
+                if (updateables[i] != null && updateables[i].isActiveAndEnabled)
+                {
+                    updateables[i].CustomUpdate();
+                }
+                else
+                {
+                    updateables.RemoveAt(i);
+
+                    count = updateables.Count;
+                }
+
+            }
+        }
     }
 }

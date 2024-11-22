@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
         if (ActiveBalls.Count <= 0)
         {
             int lives = player.GetLifes();
-            if (lives > 0)
+            if (lives > 1)
             {
                 player.LoseLife();
                 if (player.CurrentLife <= 3) hpui.UpdateHP(player.CurrentLife);

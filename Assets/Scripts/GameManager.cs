@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
     public void BlockDestroyed(Block block, int Points)
     {
 
-        GetComponent<AudioSource>().Play();
+        //GetComponent<AudioSource>().Play();
         ActiveBlocks.Remove(block.gameObject);
         //PlayerScore += Points;
         //Debug.Log(PlayerScore);

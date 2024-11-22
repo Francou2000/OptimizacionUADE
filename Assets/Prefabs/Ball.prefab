@@ -140,3 +140,5 @@ MonoBehaviour:
   RotationSpeed: 0
   radius: 0.5
   moving: 0
+  blocks: []
+  map: {fileID: 0}

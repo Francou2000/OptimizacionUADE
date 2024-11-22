@@ -30,11 +30,11 @@ public class Block : MonoBehaviour
         var blockCollider = GetComponent<BoxCollider>();
 
         //Calculate the exact positions of each side of the block
-        BlockLeft = transform.position.x - blockCollider.bounds.size.x / 2;
-        BlockRight = transform.position.x + blockCollider.bounds.size.x / 2;
+        BlockLeft = blockCollider.bounds.min.x;
+        BlockRight = blockCollider.bounds.max.x;
 
-        BlockTop = transform.position.y + blockCollider.bounds.size.y / 2;
-        BlockBot = transform.position.y - blockCollider.bounds.size.y / 2;
+        BlockTop = blockCollider.bounds.max.y;
+        BlockBot = blockCollider.bounds.min.y;
     }
 
     public void OnHit()

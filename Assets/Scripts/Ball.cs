@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Ball : IUpdateable
@@ -10,7 +11,7 @@ public class Ball : IUpdateable
     Vector3 dir;
     Vector3 ResetPos;
     Vector3 Yoffset;
-    [SerializeField] float radius;
+    //[SerializeField] float BallRadius;
     float BallRadius;
     public bool moving;
     GameObject player;
@@ -19,7 +20,7 @@ public class Ball : IUpdateable
     void Start()
     {
         BallRadius = GetComponent<SphereCollider>().radius * Mathf.Max(transform.lossyScale.x, transform.lossyScale.y, transform.lossyScale.z);
-
+        
         if (!moving)
         {
             dir = new Vector2(0, 0);
@@ -33,62 +34,106 @@ public class Ball : IUpdateable
         ResetPos = new Vector2(0, 0);
         Yoffset = new Vector3(0, 0.5f, 0);
     }
-
     private void CheckCollision(Collider collision)
     {
-
-        //Check with player
+        //Collision with player
         if (collision.gameObject.CompareTag("Player"))
         {
-            if (dir.y < 0) { dir.y = -dir.y; }
-
+            transform.position = new Vector3(transform.position.x, collision.bounds.max.y + BallRadius, transform.position.z);
+            dir.y *= -1;
+            return;
         }
 
-        //BlocksHit
-        Block block = collision.gameObject.GetComponent<Block>();
+        //Collision with blocks
+        Block block = collision.GetComponent<Block>();
         if (block != null)
         {
             BlockCollision(block);
             block.OnHit();
+            return;
         }
 
-        //SideWalls
-        if (collision.gameObject.layer == 6) { dir.x = -dir.x; }
-        //TopWall
-        if (collision.gameObject.layer == 7) { dir.y = -dir.y; }
-
+        //Colision with map
+        if (collision.gameObject.CompareTag("LeftWall"))
+        {
+            transform.position = new Vector3(collision.bounds.max.x + BallRadius, transform.position.y, transform.position.z);
+            dir.x *= -1;
+            return;
+        }
+        if (collision.gameObject.CompareTag("RightWall"))
+        {
+            transform.position = new Vector3(collision.bounds.min.x - BallRadius, transform.position.y, transform.position.z);
+            dir.x *= -1;
+            return;
+        }
+        if (collision.gameObject.CompareTag("TopWall"))
+        {
+            transform.position = new Vector3(transform.position.x, collision.bounds.min.y - BallRadius, transform.position.z);
+            dir.y *= -1;
+            return;
+        }
     }
 
-    void BlockCollision(Block Block)
+    void BlockCollision(Block block)
     {
-        //Up and down collisions
-        if (transform.position.x > Block._BlockLeft && transform.position.x < Block._BlockRight)
+        Vector3 topLeft = new Vector3(block._BlockLeft, block._BlockTop, 0);
+        Vector3 topRight = new Vector3(block._BlockRight, block._BlockTop, 0);
+        Vector3 downLeft = new Vector3(block._BlockLeft, block._BlockBot, 0);
+        Vector3 downRight = new Vector3(block._BlockRight, block._BlockBot, 0);
+        
+        if (dir.y < 0)
         {
-            if (transform.position.y + BallRadius <= Block.transform.position.y)
+            if (CollisionCircleLine(topLeft, topRight))
             {
-                dir.y = -1;
+                transform.position = new Vector3(transform.position.x, block._BlockTop + BallRadius, transform.position.z);
+                dir.y *= -1;
+                return;
             }
-            else
+        }
+        else
+        {
+            if (CollisionCircleLine(downLeft, downRight))
             {
-                dir.y = 1;
+                transform.position = new Vector3(transform.position.x, block._BlockBot - BallRadius, transform.position.z);
+                dir.y *= -1;
+                return;
+            }
+        }
+        if(dir.x > 0)
+        {
+            if (CollisionCircleLine(topLeft, downLeft))
+            {
+                transform.position = new Vector3(block._BlockLeft - BallRadius, transform.position.y, transform.position.z);
+                dir.x *= -1;
+                return;
+            }
+        }
+        else
+        {
+            if (CollisionCircleLine(topRight, downRight))
+            {
+                transform.position = new Vector3(block._BlockRight - BallRadius, transform.position.y, transform.position.z);
+                dir.x *= -1;
+                return;
             }
         }
 
-        //Left and right collisions
-        if (transform.position.y + BallRadius > Block._BlockBot && transform.position.y - BallRadius < Block._BlockTop)
-        {
-            if (transform.position.x + BallRadius <= Block.transform.position.x)
-            {
-                dir.x = -1;
-            }
-            else
-            {
-                dir.x = 1;
-            }
-        }
 
     }
-
+    bool CollisionCircleLine(Vector3 startLine, Vector3 finishLine)
+    {
+        Vector3 dif = transform.position - startLine;
+        Vector3 line = finishLine - startLine;
+        float magni = line.magnitude;
+        Vector3 dir = line.normalized;
+        float dot = dif.x * dir.x + dif.y * dir.y;
+        if (dot < 0) { dot = 0; }
+        if (dot > magni) { dot = magni; }
+        Vector3 final = dir * dot;
+        Vector3 diference = transform.position - (final + startLine);
+        float distance = diference.magnitude;
+        return distance >= BallRadius;
+    }
     public override void CustomUpdate()
     {
         if (!moving)
@@ -99,8 +144,10 @@ public class Ball : IUpdateable
         {
             Move(dir);
         }
+        //CheckCollision();
 
-        int hit = Physics.OverlapSphereNonAlloc(transform.position, radius, cols);
+        
+        int hit = Physics.OverlapSphereNonAlloc(transform.position, BallRadius, cols);
         Debug.Log(hit);
         if (hit >= 2)
         {
@@ -138,8 +185,6 @@ public class Ball : IUpdateable
         moving = true;
         dir.y = 1;
         dir.x = GiveRandom();
-
-
     }
 
     public void Reset(GameObject Player)

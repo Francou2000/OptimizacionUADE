@@ -40,10 +40,7 @@ public class Ball : IUpdateable
         //Check with player
         if (collision.gameObject.tag == "Player")
         {
-            if (dir.y < 0)
-            {
-                dir.y = -dir.y;
-            }
+            if (dir.y < 0) { dir.y = -dir.y; }
 
         }
 
@@ -52,31 +49,20 @@ public class Ball : IUpdateable
         if (block != null)
         {
             BlockCollision(block);
-            //collision.gameObject.GetComponent<Block>().OnHit();
+            block.OnHit();
         }
 
         //SideWalls
-        if (collision.gameObject.layer == 6)
-            dir.x = -dir.x;
+        if (collision.gameObject.layer == 6) { dir.x = -dir.x; }
         //TopWall
-        if (collision.gameObject.layer == 7)
-            dir.y = -dir.y;
+        if (collision.gameObject.layer == 7) { dir.y = -dir.y; }
+
     }
 
     void BlockCollision(Block Block)
     {
-        ////Get the Actual Size of the Block
-        //var blockCollider = Block.GetComponent<Renderer>();
-
-        ////Calculate the exact positions of each side of the block
-        //float BlockLeft = Block.transform.position.x - blockCollider.bounds.size.x / 2;
-        //float BlockRight = Block.transform.position.x + blockCollider.bounds.size.x / 2;
-
-        //float BlockTop = Block.transform.position.y + blockCollider.bounds.size.y / 2;
-        //float BlockBot = Block.transform.position.y - blockCollider.bounds.size.y / 2;
-
         //Up and down collisions
-        if(transform.position.x > Block._BlockLeft && transform.position.x < Block._BlockRight)
+        if (transform.position.x > Block._BlockLeft && transform.position.x < Block._BlockRight)
         {
             if (transform.position.y + BallRadius <= Block.transform.position.y)
             {
@@ -101,29 +87,6 @@ public class Ball : IUpdateable
             }
         }
 
-        //if (transform.position.y + BallRadius <= Block.transform.position.y && transform.position.x > BlockLeft && transform.position.x < BlockRight)
-        //{
-        //    dir.y = -1;
-
-        //}
-
-        //if (transform.position.y - BallRadius >= Block.transform.position.y && transform.position.x > BlockLeft && transform.position.x < BlockRight)
-        //{
-        //    dir.y = 1;
-
-        //}
-
-        //if (transform.position.x >= BlockRight && transform.position.y + BallRadius > BlockBot && transform.position.y - BallRadius < BlockTop)
-        //{
-
-        //    dir.x = 1;
-        //}
-
-        //else if (transform.position.x <= BlockLeft && transform.position.y + BallRadius > BlockBot && transform.position.y - BallRadius < BlockTop)
-        //{
-
-        //    dir.x = -1;
-        //}
     }
 
     public override void CustomUpdate()

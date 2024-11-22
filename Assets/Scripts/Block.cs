@@ -54,7 +54,6 @@ public class Block : MonoBehaviour
     void DestroyBlock()
     {
         GameManager.instance.BlockDestroyed(this, Points);
-
     }
 
 }

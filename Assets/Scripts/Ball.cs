@@ -76,6 +76,19 @@ public class Ball : IUpdateable
 
     void BlockCollision(Block block)
     {
+        Vector3 closestPoint = SphereRectangleCollision(block.GetComponent<Collider>(), GetComponent<SphereCollider>());
+        float difX = closestPoint.x - transform.position.x;
+        float difY = closestPoint.y - transform.position.y;
+        transform.position = closestPoint + BallRadius * (transform.position - closestPoint).normalized;
+        if(difX > difY)
+        {
+            dir.x *= -1;
+        }
+        else
+        {
+            dir.y *= -1;
+        }
+        /*
         Vector3 topLeft = new Vector3(block._BlockLeft, block._BlockTop, 0);
         Vector3 topRight = new Vector3(block._BlockRight, block._BlockTop, 0);
         Vector3 downLeft = new Vector3(block._BlockLeft, block._BlockBot, 0);
@@ -116,7 +129,7 @@ public class Ball : IUpdateable
                 dir.x *= -1;
                 return;
             }
-        }
+        }*/
 
 
     }
@@ -133,6 +146,16 @@ public class Ball : IUpdateable
         Vector3 diference = transform.position - (final + startLine);
         float distance = diference.magnitude;
         return distance >= BallRadius;
+    }
+    Vector3 SphereRectangleCollision(Collider rec, SphereCollider sphere)
+    {
+        Vector3 closestPoint = sphere.transform.position;
+        if (closestPoint.x < rec.bounds.min.x) closestPoint.x = rec.bounds.min.x;
+        if (closestPoint.x > rec.bounds.max.x) closestPoint.x = rec.bounds.max.x;
+        if (closestPoint.y < rec.bounds.min.y) closestPoint.y = rec.bounds.min.y;
+        if (closestPoint.y > rec.bounds.max.y) closestPoint.y = rec.bounds.max.y;
+
+        return closestPoint;
     }
     public override void CustomUpdate()
     {

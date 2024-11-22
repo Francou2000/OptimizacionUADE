@@ -5,7 +5,6 @@ using UnityEngine;
 public class UpdateManager : MonoBehaviour
 {
     [SerializeField] public List<IUpdateable> updateables = new List<IUpdateable>();
-    [SerializeField] int a;
     public bool isplaying;
 
     void Start()
@@ -13,21 +12,21 @@ public class UpdateManager : MonoBehaviour
         isplaying = true;
     }
 
-
     void Update()
     {
         if (!isplaying) return;
 
         for (int i = updateables.Count - 1; i >= 0; i--)
         {
-            var updateable = updateables[i];
+            int cloneI = i;
+            var updateable = updateables[cloneI];
             if (updateable != null && updateable.isActiveAndEnabled)
             {
                 updateable.CustomUpdate();
             }
             else
             {
-                updateables.RemoveAt(i);
+                updateables.RemoveAt(cloneI);
             }
         }
     }

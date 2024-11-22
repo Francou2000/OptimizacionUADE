@@ -90,20 +90,6 @@ public class Ball : IUpdateable
             dir.y *= -1;
         }
     }
-    bool CollisionCircleLine(Vector3 startLine, Vector3 finishLine)
-    {
-        Vector3 dif = transform.position - startLine;
-        Vector3 line = finishLine - startLine;
-        float magni = line.magnitude;
-        Vector3 dir = line.normalized;
-        float dot = dif.x * dir.x + dif.y * dir.y;
-        if (dot < 0) { dot = 0; }
-        if (dot > magni) { dot = magni; }
-        Vector3 final = dir * dot;
-        Vector3 diference = transform.position - (final + startLine);
-        float distance = diference.magnitude;
-        return distance >= BallRadius;
-    }
     Vector3 SphereRectangleCollision(Collider rec, SphereCollider sphere)
     {
         Vector3 closestPoint = sphere.transform.position;
@@ -126,7 +112,7 @@ public class Ball : IUpdateable
         }
         
         int hit = Physics.OverlapSphereNonAlloc(transform.position, BallRadius, cols);
-        Debug.Log(hit);
+        
         if (hit >= 2)
         {
             for (int i = 0; i < hit; i++)
@@ -137,7 +123,7 @@ public class Ball : IUpdateable
         if (transform.position.y <= -8)
         {
             dir = Vector3.zero;
-            Debug.Log(dir);
+            
             GameManager.instance.LostBall(this.gameObject);
         }
     }
@@ -170,7 +156,7 @@ public class Ball : IUpdateable
         transform.position = ResetPos;
         dir = Vector3.zero;
         moving = false;
-        player = player;
+        this.player = player;
     }
 
     void FollowPlayer()

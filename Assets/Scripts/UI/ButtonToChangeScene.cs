@@ -21,6 +21,8 @@ public class ButtonToChangeScene : MonoBehaviour
     public enum Scenes
     {
         MainMenu,
-        Game
+        Game,
+        WinScreen,
+        LoseScreen
     }      
 }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using static ButtonToChangeScene;
 
 public class GameManager : MonoBehaviour
 {
@@ -105,6 +107,7 @@ public class GameManager : MonoBehaviour
         {
             //panelWin.SetActive(true);
             updateManager.isplaying = false;
+            SceneManager.LoadScene((int)Scenes.WinScreen);
         }
     }
 

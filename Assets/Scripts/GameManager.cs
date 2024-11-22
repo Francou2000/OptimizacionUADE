@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     UpdateManager updateManager;
     [SerializeField] Player player;
+    [SerializeField] private HP hpui;
 
     private void Awake()
     {
@@ -77,6 +78,8 @@ public class GameManager : MonoBehaviour
             if (lives > 0)
             {
                 player.LoseLife();
+                if (player.CurrentLife <= 3) hpui.UpdateHP(player.CurrentLife);
+                Debug.Log("Lost life");
                 //BallSprite[lives].enabled = false;
                 DestroyPowerUps();
                 RestartLevel();

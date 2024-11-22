@@ -109,7 +109,7 @@ public class Ball : IUpdateable
                 CheckCollision(cols[i]);
             }
         }
-        if (transform.position.y <= -4.90)
+        if (transform.position.y <= -8)
         {
             dir = Vector3.zero;
             Debug.Log(dir);

@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
         ActiveBalls = new List<GameObject>();
 
         ActiveBalls.Add(ballPool.GetBall());
+        ActiveBalls[0].GetComponent<Ball>().Reset(player.gameObject);
         updateManager.AddUpdateable(ActiveBalls[0].GetComponent<Ball>());
         AddToUpdateList(player);
 

@@ -24,7 +24,7 @@ public class Player : IUpdateable
         Vector3 horizontal = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
 
         transform.position += horizontal * _movementSpeed * Time.deltaTime;
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -5.6f, 4.91f), transform.position.y, transform.position.z);
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, -15.75f, 16.4f), transform.position.y, transform.position.z);
         if (!MatchStarted && Input.GetKeyDown(KeyCode.Space))
         {
             OnStartMatch?.Invoke();

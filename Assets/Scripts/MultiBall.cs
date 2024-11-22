@@ -24,7 +24,7 @@ public class MultiBall : IUpdateable
             if (hit >= 1)
             {
                 Debug.Log("MultiBAll");
-                GameManager.instance.MultiBall();
+                GameManager.instance.MultiBall(this);
                 Destroy(gameObject);
             }
 

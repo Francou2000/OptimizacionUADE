@@ -22,40 +22,44 @@ public class GameManager : MonoBehaviour
         ActiveBalls = new List<GameObject>();
 
         ActiveBalls.Add(ballPool.GetBall());
-        updateManager.updateables.Add(ActiveBalls[0].GetComponent<Ball>());
+        updateManager.AddUpdateable(ActiveBalls[0].GetComponent<Ball>());
         AddToUpdateList(player);
 
         //Player.OnLoseLife += RestartLevel;
     }
 
-    public void MultiBall()
+    public void MultiBall(IUpdateable multiball)
     {
         int currentBalls = ActiveBalls.Count;
         Debug.Log(currentBalls);
         for (int i = 0; i < currentBalls; i++)
         {
+            var cloneI = i;
             for (int b = 0; b < 2; b++)
             {
                 GameObject Ball = ballPool.GetBall();
-                Ball.transform.position = ActiveBalls[i].transform.position;
+                Ball.transform.position = ActiveBalls[cloneI].transform.position;
                 ActiveBalls.Add(Ball);
                 Ball ball = Ball.GetComponent<Ball>();
-                updateManager.updateables.Add(ball);
+                updateManager.AddUpdateable(ball);
                 ball.moving = true;
                 ball.StartMovement();
             }
         }
+        updateManager.RemoveUpdateable(multiball);
     }
 
     public void AddToUpdateList(IUpdateable updateable)
     {
-        updateManager.updateables.Add(updateable);
+        updateManager.AddUpdateable(updateable);
     }
 
     public void LostBall(GameObject Ball)
     {
         ballPool.ReturnToPool(Ball);
         ActiveBalls.Remove(Ball);
+        Ball ball = Ball.GetComponent<Ball>();
+        updateManager.RemoveUpdateable(ball);
 
         if (ActiveBalls.Count <= 0)
         {
@@ -109,6 +113,6 @@ public class GameManager : MonoBehaviour
         ActiveBalls.Add(Ball);
         Ball ball = Ball.GetComponent<Ball>();
         ball.Reset(player.gameObject);
-        updateManager.updateables.Add(ball);
+        updateManager.AddUpdateable(ball);
     }
 }

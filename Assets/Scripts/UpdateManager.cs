@@ -11,7 +11,7 @@ public class UpdateManager : MonoBehaviour
     void Start()
     {
         isplaying = true;
-        updateables = FindObjectsByType<IUpdateable>(FindObjectsSortMode.None).ToList();
+        //updateables = FindObjectsByType<IUpdateable>(FindObjectsSortMode.None).ToList();
     }
 
     public void AddUpdateable(IUpdateable updateable)
@@ -36,10 +36,6 @@ public class UpdateManager : MonoBehaviour
             if (updateable != null && updateable.isActiveAndEnabled)
             {
                 updateable.CustomUpdate();
-            }
-            else
-            {
-                updateables.RemoveAt(cloneI);
             }
         }
     }

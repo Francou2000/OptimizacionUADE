@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator SetBalls()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForEndOfFrame();
         ActiveBalls.Add(ballPool.GetBall());
         ActiveBalls[0].GetComponent<Ball>().Reset(player.gameObject);
         updateManager.AddUpdateable(ActiveBalls[0].GetComponent<Ball>());

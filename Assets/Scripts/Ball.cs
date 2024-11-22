@@ -38,7 +38,7 @@ public class Ball : IUpdateable
     {
 
         //Check with player
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.CompareTag("Player"))
         {
             if (dir.y < 0) { dir.y = -dir.y; }
 

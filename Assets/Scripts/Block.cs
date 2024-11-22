@@ -7,6 +7,7 @@ public class Block : MonoBehaviour
     [SerializeField] int HitstoDestroy;
     [SerializeField] int CurrentHits;
     [SerializeField] GameObject PowerUp;
+    [SerializeField] int powerUpChance;
     [SerializeField] public int Points;
 
 
@@ -41,7 +42,7 @@ public class Block : MonoBehaviour
         CurrentHits--;
         if (CurrentHits <= 0)
         {
-            if (PowerUp)
+            if (PowerUp && Random.Range(1, 101) < powerUpChance)
             {
                 GameObject powerUP = Instantiate(PowerUp, this.transform.position, PowerUp.transform.rotation);
                 GameManager.instance.AddToUpdateList(powerUP.GetComponent<MultiBall>());

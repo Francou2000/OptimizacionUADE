@@ -1130,8 +1130,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 621701228}
-  - component: {fileID: 621701229}
   - component: {fileID: 621701230}
+  - component: {fileID: 621701229}
   - component: {fileID: 621701231}
   - component: {fileID: 621701232}
   m_Layer: 0
@@ -4186,7 +4186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3030079775136079414, guid: 670053f21dba3984a89f12a992307f3f, type: 3}
       propertyPath: _maxLife
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6905352415948333043, guid: 670053f21dba3984a89f12a992307f3f, type: 3}
       propertyPath: m_LocalPosition.x

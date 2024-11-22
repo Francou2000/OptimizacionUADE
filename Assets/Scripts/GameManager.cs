@@ -23,12 +23,19 @@ public class GameManager : MonoBehaviour
         ballPool = GetComponent<BallPool>();
         ActiveBalls = new List<GameObject>();
 
+        StartCoroutine(SetBalls());
+        
+        //Player.OnLoseLife += RestartLevel;
+    }
+
+    IEnumerator SetBalls()
+    {
+        yield return new WaitForSeconds(0.5f);
         ActiveBalls.Add(ballPool.GetBall());
         ActiveBalls[0].GetComponent<Ball>().Reset(player.gameObject);
         updateManager.AddUpdateable(ActiveBalls[0].GetComponent<Ball>());
         AddToUpdateList(player);
 
-        //Player.OnLoseLife += RestartLevel;
     }
 
     public void MultiBall(IUpdateable multiball)

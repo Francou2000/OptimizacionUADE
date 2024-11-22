@@ -23,19 +23,17 @@ public class BallPool : MonoBehaviour
 
     public GameObject GetBall()
     {
+        GameObject Ball;
         if (ballsPool.Count > 0)
         {
-            GameObject ball = ballsPool.Dequeue();
-            ball.SetActive(true);
-            return ball;
+            Ball = ballsPool.Dequeue();
+            Ball.SetActive(true);
         }
-
         else
         {
-            GameObject Ball = Instantiate(BallPrefab);
-            return Ball;
-
+            Ball = Instantiate(BallPrefab);
         }
+        return Ball;
     }
 
     public void ReturnToPool(GameObject Ball)

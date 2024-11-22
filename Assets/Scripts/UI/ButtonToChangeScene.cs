@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 public class ButtonToChangeScene : MonoBehaviour
 {
-    [SerializeField] string newScene;
+    [SerializeField] Scenes newScene;
     Button _myButton;
     
     void Start()
@@ -15,6 +15,12 @@ public class ButtonToChangeScene : MonoBehaviour
 
     public void ChangeScene()
     {
-        SceneManager.LoadScene(newScene);
+        SceneManager.LoadScene((int)newScene);
     }
+
+    public enum Scenes
+    {
+        MainMenu,
+        Game
+    }      
 }

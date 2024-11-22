@@ -48,10 +48,10 @@ public class Ball : IUpdateable
         }
 
         //BlocksHit
-        if (collision.gameObject.GetComponent<Block>())
+        Block block = collision.gameObject.GetComponent<Block>();
+        if (block != null)
         {
-
-            BlockCollision(collision.gameObject);
+            BlockCollision(block);
             //collision.gameObject.GetComponent<Block>().OnHit();
         }
 
@@ -63,42 +63,67 @@ public class Ball : IUpdateable
             dir.y = -dir.y;
     }
 
-    void BlockCollision(GameObject Block)
+    void BlockCollision(Block Block)
     {
-        //Get the Actual Size of the Block
-        var blockCollider = Block.GetComponent<Renderer>();
+        ////Get the Actual Size of the Block
+        //var blockCollider = Block.GetComponent<Renderer>();
 
-        //Calculate the exact positions of each side of the block
-        float BlockLeft = Block.transform.position.x - blockCollider.bounds.size.x / 2;
-        float BlockRight = Block.transform.position.x + blockCollider.bounds.size.x / 2;
+        ////Calculate the exact positions of each side of the block
+        //float BlockLeft = Block.transform.position.x - blockCollider.bounds.size.x / 2;
+        //float BlockRight = Block.transform.position.x + blockCollider.bounds.size.x / 2;
 
-        float BlockTop = Block.transform.position.y + blockCollider.bounds.size.y / 2;
-        float BlockBot = Block.transform.position.y - blockCollider.bounds.size.y / 2;
+        //float BlockTop = Block.transform.position.y + blockCollider.bounds.size.y / 2;
+        //float BlockBot = Block.transform.position.y - blockCollider.bounds.size.y / 2;
 
-
-        if (transform.position.y + BallRadius <= Block.transform.position.y && transform.position.x > BlockLeft && transform.position.x < BlockRight)
+        //Up and down collisions
+        if(transform.position.x > Block._BlockLeft && transform.position.x < Block._BlockRight)
         {
-            dir.y = -1;
-
+            if (transform.position.y + BallRadius <= Block.transform.position.y)
+            {
+                dir.y = -1;
+            }
+            else
+            {
+                dir.y = 1;
+            }
         }
 
-        if (transform.position.y - BallRadius >= Block.transform.position.y && transform.position.x > BlockLeft && transform.position.x < BlockRight)
+        //Left and right collisions
+        if (transform.position.y + BallRadius > Block._BlockBot && transform.position.y - BallRadius < Block._BlockTop)
         {
-            dir.y = 1;
-
+            if (transform.position.x + BallRadius <= Block.transform.position.x)
+            {
+                dir.x = -1;
+            }
+            else
+            {
+                dir.x = 1;
+            }
         }
 
-        if (transform.position.x >= BlockRight && transform.position.y + BallRadius > BlockBot && transform.position.y - BallRadius < BlockTop)
-        {
+        //if (transform.position.y + BallRadius <= Block.transform.position.y && transform.position.x > BlockLeft && transform.position.x < BlockRight)
+        //{
+        //    dir.y = -1;
 
-            dir.x = 1;
-        }
+        //}
 
-        else if (transform.position.x <= BlockLeft && transform.position.y + BallRadius > BlockBot && transform.position.y - BallRadius < BlockTop)
-        {
+        //if (transform.position.y - BallRadius >= Block.transform.position.y && transform.position.x > BlockLeft && transform.position.x < BlockRight)
+        //{
+        //    dir.y = 1;
 
-            dir.x = -1;
-        }
+        //}
+
+        //if (transform.position.x >= BlockRight && transform.position.y + BallRadius > BlockBot && transform.position.y - BallRadius < BlockTop)
+        //{
+
+        //    dir.x = 1;
+        //}
+
+        //else if (transform.position.x <= BlockLeft && transform.position.y + BallRadius > BlockBot && transform.position.y - BallRadius < BlockTop)
+        //{
+
+        //    dir.x = -1;
+        //}
     }
 
     public override void CustomUpdate()

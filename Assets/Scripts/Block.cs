@@ -15,8 +15,6 @@ public class Block : MonoBehaviour
         CurrentHits = HitstoDestroy;
     }
 
-
-
     public void OnHit()
     {
         CurrentHits--;

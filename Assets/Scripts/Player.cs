@@ -10,16 +10,15 @@ public class Player : IUpdateable
     [SerializeField] int _currentLife;
     bool MatchStarted;
     public static event Action OnStartMatch;
-    public static event Action OnLoseLife;
+    //public static event Action OnLoseLife;
     BoxCollider boxCollider;
-    // Start is called before the first frame update
+
     void Start()
     {
         GameManager.instance.AddToUpdateList(this.GetComponent<Player>());
         _currentLife = _maxLife;
     }
 
-    // Update is called once per frame
     public override void CustomUpdate()
     {
         Vector3 horizontal = new Vector3(Input.GetAxis("Horizontal"), 0, 0);
@@ -31,7 +30,6 @@ public class Player : IUpdateable
             OnStartMatch?.Invoke();
             MatchStarted = true;
         }
-
     }
 
     public int GetLifes()

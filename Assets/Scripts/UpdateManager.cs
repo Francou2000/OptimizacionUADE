@@ -16,22 +16,18 @@ public class UpdateManager : MonoBehaviour
 
     void Update()
     {
-        if (isplaying)
+        if (!isplaying) return;
+
+        for (int i = updateables.Count - 1; i >= 0; i--)
         {
-            var count = updateables.Count;
-            for (int i = 0; i < count; i++)
+            var updateable = updateables[i];
+            if (updateable != null && updateable.isActiveAndEnabled)
             {
-                if (updateables[i] != null && updateables[i].isActiveAndEnabled)
-                {
-                    updateables[i].CustomUpdate();
-                }
-                else
-                {
-                    updateables.RemoveAt(i);
-
-                    count = updateables.Count;
-                }
-
+                updateable.CustomUpdate();
+            }
+            else
+            {
+                updateables.RemoveAt(i);
             }
         }
     }

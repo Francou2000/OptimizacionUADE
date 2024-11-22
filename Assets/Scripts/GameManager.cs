@@ -21,17 +21,12 @@ public class GameManager : MonoBehaviour
         ballPool = GetComponent<BallPool>();
         ActiveBalls = new List<GameObject>();
 
-    }
-    void Start()
-    {
-
         ActiveBalls.Add(ballPool.GetBall());
         updateManager.updateables.Add(ActiveBalls[0].GetComponent<Ball>());
         AddToUpdateList(player);
 
-        Player.OnLoseLife += RestartLevel;
+        //Player.OnLoseLife += RestartLevel;
     }
-
 
     public void MultiBall()
     {
@@ -49,17 +44,13 @@ public class GameManager : MonoBehaviour
                 ball.moving = true;
                 ball.StartMovement();
             }
-
-
         }
     }
-
 
     public void AddToUpdateList(IUpdateable updateable)
     {
         updateManager.updateables.Add(updateable);
     }
-
 
     public void LostBall(GameObject Ball)
     {

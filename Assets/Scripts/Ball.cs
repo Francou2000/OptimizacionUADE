@@ -34,10 +34,6 @@ public class Ball : IUpdateable
         Yoffset = new Vector3(0, 0.5f, 0);
     }
 
-
-
-
-
     private void CheckCollision(Collider collision)
     {
 
@@ -133,7 +129,6 @@ public class Ball : IUpdateable
         }
     }
 
-
     void Move(Vector3 direction)
     {
         transform.position += direction * _movementSpeed * Time.deltaTime;
@@ -149,7 +144,6 @@ public class Ball : IUpdateable
         return i;
 
     }
-
 
     public void StartMovement()
     {
@@ -174,12 +168,7 @@ public class Ball : IUpdateable
         {
             transform.position = player.transform.position;
             transform.position += Yoffset;
-
         }
     }
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = new Color(255, 0, 0);
-        Gizmos.DrawSphere(transform.position, radius);
-    }
+
 }

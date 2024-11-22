@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UpdateManager : MonoBehaviour
@@ -10,13 +11,25 @@ public class UpdateManager : MonoBehaviour
     void Start()
     {
         isplaying = true;
+        updateables = FindObjectsByType<IUpdateable>(FindObjectsSortMode.None).ToList();
+    }
+
+    public void AddUpdateable(IUpdateable updateable)
+    {
+        updateables.Add(updateable);
+    }
+
+    public void RemoveUpdateable(IUpdateable updateable)
+    {
+        if (updateable != null) updateables.Remove(updateable);
     }
 
     void Update()
     {
         if (!isplaying) return;
 
-        for (int i = updateables.Count - 1; i >= 0; i--)
+        var count = updateables.Count;
+        for (int i = count - 1; i >= 0; i--)
         {
             int cloneI = i;
             var updateable = updateables[cloneI];

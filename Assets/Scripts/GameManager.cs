@@ -86,6 +86,7 @@ public class GameManager : MonoBehaviour
             }
             else
             {
+                SceneManager.LoadScene((int)Scenes.LoseScreen);
                 //BallSprite[lives].enabled = false;
                 //panelLose.SetActive(true);
             }

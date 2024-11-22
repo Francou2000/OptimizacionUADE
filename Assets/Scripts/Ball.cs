@@ -11,7 +11,6 @@ public class Ball : IUpdateable
     Vector3 dir;
     Vector3 ResetPos;
     Vector3 Yoffset;
-    //[SerializeField] float BallRadius;
     float BallRadius;
     public bool moving;
     GameObject player;
@@ -36,10 +35,12 @@ public class Ball : IUpdateable
     }
     private void CheckCollision(Collider collision)
     {
+        var currentPos = transform.position;
+        
         //Collision with player
         if (collision.gameObject.CompareTag("Player"))
         {
-            transform.position = new Vector3(transform.position.x, collision.bounds.max.y + BallRadius, transform.position.z);
+            transform.position = new Vector3(currentPos.x, collision.bounds.max.y + BallRadius, currentPos.z);
             dir.y *= -1;
             return;
         }
@@ -56,19 +57,19 @@ public class Ball : IUpdateable
         //Colision with map
         if (collision.gameObject.CompareTag("LeftWall"))
         {
-            transform.position = new Vector3(collision.bounds.max.x + BallRadius, transform.position.y, transform.position.z);
+            transform.position = new Vector3(collision.bounds.max.x + BallRadius, currentPos.y, currentPos.z);
             dir.x *= -1;
             return;
         }
         if (collision.gameObject.CompareTag("RightWall"))
         {
-            transform.position = new Vector3(collision.bounds.min.x - BallRadius, transform.position.y, transform.position.z);
+            transform.position = new Vector3(collision.bounds.min.x - BallRadius, currentPos.y, currentPos.z);
             dir.x *= -1;
             return;
         }
         if (collision.gameObject.CompareTag("TopWall"))
         {
-            transform.position = new Vector3(transform.position.x, collision.bounds.min.y - BallRadius, transform.position.z);
+            transform.position = new Vector3(currentPos.x, collision.bounds.min.y - BallRadius, currentPos.z);
             dir.y *= -1;
             return;
         }
@@ -88,50 +89,6 @@ public class Ball : IUpdateable
         {
             dir.y *= -1;
         }
-        /*
-        Vector3 topLeft = new Vector3(block._BlockLeft, block._BlockTop, 0);
-        Vector3 topRight = new Vector3(block._BlockRight, block._BlockTop, 0);
-        Vector3 downLeft = new Vector3(block._BlockLeft, block._BlockBot, 0);
-        Vector3 downRight = new Vector3(block._BlockRight, block._BlockBot, 0);
-        
-        if (dir.y < 0)
-        {
-            if (CollisionCircleLine(topLeft, topRight))
-            {
-                transform.position = new Vector3(transform.position.x, block._BlockTop + BallRadius, transform.position.z);
-                dir.y *= -1;
-                return;
-            }
-        }
-        else
-        {
-            if (CollisionCircleLine(downLeft, downRight))
-            {
-                transform.position = new Vector3(transform.position.x, block._BlockBot - BallRadius, transform.position.z);
-                dir.y *= -1;
-                return;
-            }
-        }
-        if(dir.x > 0)
-        {
-            if (CollisionCircleLine(topLeft, downLeft))
-            {
-                transform.position = new Vector3(block._BlockLeft - BallRadius, transform.position.y, transform.position.z);
-                dir.x *= -1;
-                return;
-            }
-        }
-        else
-        {
-            if (CollisionCircleLine(topRight, downRight))
-            {
-                transform.position = new Vector3(block._BlockRight - BallRadius, transform.position.y, transform.position.z);
-                dir.x *= -1;
-                return;
-            }
-        }*/
-
-
     }
     bool CollisionCircleLine(Vector3 startLine, Vector3 finishLine)
     {
@@ -167,8 +124,6 @@ public class Ball : IUpdateable
         {
             Move(dir);
         }
-        //CheckCollision();
-
         
         int hit = Physics.OverlapSphereNonAlloc(transform.position, BallRadius, cols);
         Debug.Log(hit);
@@ -210,12 +165,12 @@ public class Ball : IUpdateable
         dir.x = GiveRandom();
     }
 
-    public void Reset(GameObject Player)
+    public void Reset(GameObject player)
     {
         transform.position = ResetPos;
         dir = Vector3.zero;
         moving = false;
-        player = Player;
+        player = player;
     }
 
     void FollowPlayer()

@@ -25,8 +25,6 @@ public class GameManager : MonoBehaviour
         ActiveBalls = new List<GameObject>();
 
         StartCoroutine(SetBalls());
-        
-        //Player.OnLoseLife += RestartLevel;
     }
 
     IEnumerator SetBalls()
@@ -80,15 +78,12 @@ public class GameManager : MonoBehaviour
                 player.LoseLife();
                 if (player.CurrentLife <= 3) hpui.UpdateHP(player.CurrentLife);
                 Debug.Log("Lost life");
-                //BallSprite[lives].enabled = false;
                 DestroyPowerUps();
                 RestartLevel();
             }
             else
             {
                 SceneManager.LoadScene((int)Scenes.LoseScreen);
-                //BallSprite[lives].enabled = false;
-                //panelLose.SetActive(true);
             }
         }
     }
@@ -106,17 +101,10 @@ public class GameManager : MonoBehaviour
     }
     public void BlockDestroyed(Block block, int Points)
     {
-
-        //GetComponent<AudioSource>().Play();
         ActiveBlocks.Remove(block.gameObject);
-        //PlayerScore += Points;
-        //Debug.Log(PlayerScore);
-
-        //score.text = PlayerScore.ToString();
-
+        
         if (ActiveBlocks.Count <= 0)
         {
-            //panelWin.SetActive(true);
             updateManager.isplaying = false;
             SceneManager.LoadScene((int)Scenes.WinScreen);
         }

@@ -6,8 +6,10 @@ using UnityEngine.UI;
 public class HP : MonoBehaviour
 {
    [SerializeField] Slider slider;
-
-   public void updateHP(int HP)  {
-    slider.value = HP; 
+   
+   public void UpdateHP(int HP)  
+   { 
+      //Debug.Log("hp: " + HP);
+      slider.value = HP; 
    }
 }

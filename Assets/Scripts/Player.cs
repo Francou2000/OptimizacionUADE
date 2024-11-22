@@ -8,6 +8,7 @@ public class Player : IUpdateable
     [SerializeField] float _movementSpeed;
     [SerializeField] int _maxLife;
     [SerializeField] int _currentLife;
+    public int CurrentLife => _currentLife;
     bool MatchStarted;
     public static event Action OnStartMatch;
     //public static event Action OnLoseLife;

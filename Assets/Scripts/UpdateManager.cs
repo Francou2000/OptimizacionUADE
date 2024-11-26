@@ -31,9 +31,7 @@ public class UpdateManager : MonoBehaviour
         var count = updateables.Count;
         for (int i = count - 1; i >= 0; i--)
         {
-            
-            int cloneI = i;
-            var updateable = updateables[cloneI];
+            var updateable = updateables[i];
             if (updateable != null && updateable.isActiveAndEnabled)
             {
                 updateable.CustomUpdate();

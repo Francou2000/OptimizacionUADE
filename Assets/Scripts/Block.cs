@@ -9,9 +9,9 @@ public class Block : MonoBehaviour
     [SerializeField] GameObject PowerUp;
     [SerializeField] int powerUpChance;
     [SerializeField] public int Points;
+    [SerializeField] GameObject hitParticlesPrefab;
 
-
-    //Position of each side of the block
+    // Position of each side of the block
     float BlockLeft;
     float BlockRight;
     float BlockTop;
@@ -26,10 +26,10 @@ public class Block : MonoBehaviour
     {
         CurrentHits = HitstoDestroy;
 
-        //Get the Actual Size of the Block
+        // Get the actual size of the block
         var blockCollider = GetComponent<BoxCollider>();
 
-        //Calculate the exact positions of each side of the block
+        // Calculate the exact positions of each side of the block
         BlockLeft = blockCollider.bounds.min.x;
         BlockRight = blockCollider.bounds.max.x;
 
@@ -50,11 +50,19 @@ public class Block : MonoBehaviour
             DestroyBlock();
             Destroy(this.gameObject);
         }
+        else
+        {
+            if (hitParticlesPrefab)
+            {
+                Vector3 center = GetComponent<Renderer>().bounds.center;
+                GameObject particles = Instantiate(hitParticlesPrefab, center, Quaternion.identity);
+                Destroy(particles, 1f); 
+            }
+        }
     }
 
     void DestroyBlock()
     {
         GameManager.instance.BlockDestroyed(this, Points);
     }
-
 }

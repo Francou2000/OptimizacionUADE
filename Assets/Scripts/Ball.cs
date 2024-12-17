@@ -41,7 +41,14 @@ public class Ball : IUpdateable
         if (collision.gameObject.CompareTag("Player"))
         {
             transform.position = new Vector3(currentPos.x, collision.bounds.max.y + BallRadius, currentPos.z);
-            dir.y *= -1;
+
+            float playerCenterX = collision.bounds.center.x;
+            float playerWidth = collision.bounds.size.x;
+
+            float relativeHitPosition = (currentPos.x - playerCenterX) / (playerWidth / 2f);
+
+            dir = new Vector3(relativeHitPosition, 1, 0).normalized;
+
             return;
         }
 

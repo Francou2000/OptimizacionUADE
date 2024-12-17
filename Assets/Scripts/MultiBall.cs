@@ -31,16 +31,4 @@ public class MultiBall : IUpdateable
             if(transform.position.y <= _destryHigth) { Destroy(gameObject); }
         }
     }
-
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (collision.gameObject.CompareTag("Player"))
-    //    {
-    //        Debug.Log("MultiBAll");
-    //        GameManager.instance.MultiBall();
-    //        Destroy(gameObject);
-    //    }
-    //}
-
-
 }

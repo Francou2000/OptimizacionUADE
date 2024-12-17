@@ -8,7 +8,7 @@ public class MultiBall : IUpdateable
     [SerializeField] float _rotationSpeed;
 
     [SerializeField] float _collisionHigth;
-    [SerializeField] float _destryHigth;
+    [SerializeField] float _destroyHeigth;
     Collider[] cols = new Collider[1];
     [SerializeField] LayerMask _playerMask;
 
@@ -28,7 +28,7 @@ public class MultiBall : IUpdateable
                 Destroy(gameObject);
             }
 
-            if(transform.position.y <= _destryHigth) { Destroy(gameObject); }
+            if(transform.position.y <= _destroyHeigth) { Destroy(gameObject); }
         }
     }
 }

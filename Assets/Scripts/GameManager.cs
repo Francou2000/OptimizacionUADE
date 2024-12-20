@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour
         {
             var cloneI = i;
             Ball ball = ActiveBalls[cloneI].GetComponent<Ball>();
-            ball.SetBigBall(3, 2);
+            ball.SetBigBall();
         }
         updateManager.RemoveUpdateable(pwrup);
     }
@@ -95,7 +95,7 @@ public class GameManager : MonoBehaviour
             {
                 player.LoseLife();
                 if (player.CurrentLife <= 3) hpui.UpdateHP(player.CurrentLife);
-                Debug.Log("Lost life");
+                //Debug.Log("Lost life");
                 DestroyPowerUps();
                 RestartLevel();
             }

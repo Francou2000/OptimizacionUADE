@@ -45,7 +45,7 @@ public class Block : MonoBehaviour
             if (Random.Range(1, 101) < powerUpChance)
             {
                 int pwrUpIndex = Random.Range(0, PowerUps.Count);
-                Debug.Log(pwrUpIndex);
+                //Debug.Log(pwrUpIndex);
                 var SelectedPowerUp = PowerUps[pwrUpIndex];
                 GameObject powerUP = Instantiate(SelectedPowerUp, this.transform.position, SelectedPowerUp.transform.rotation);
                 GameManager.instance.AddToUpdateList(powerUP.GetComponent<MultiBall>());

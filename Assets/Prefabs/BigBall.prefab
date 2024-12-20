@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3910569792107461046
+--- !u!1 &482257209500944878
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5472817366332289531}
-  - component: {fileID: 2242029873891569046}
-  - component: {fileID: 8137920662743943350}
-  - component: {fileID: 2022187442344590474}
-  - component: {fileID: 5137318609455784937}
+  - component: {fileID: 5882442169273657349}
+  - component: {fileID: 827475810540618725}
+  - component: {fileID: 6334731963736711760}
+  - component: {fileID: 2936047991883481422}
+  - component: {fileID: 8342759424825424172}
   m_Layer: 0
-  m_Name: Block
-  m_TagString: Untagged
+  m_Name: BigBall
+  m_TagString: PowerUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5472817366332289531
+--- !u!4 &5882442169273657349
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3910569792107461046}
+  m_GameObject: {fileID: 482257209500944878}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -15, y: 9, z: 2}
-  m_LocalScale: {x: 3.5, y: 1.5, z: 1}
+  m_LocalPosition: {x: 2.2264218, y: 2.4539726, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &2242029873891569046
+--- !u!33 &827475810540618725
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3910569792107461046}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &8137920662743943350
+  m_GameObject: {fileID: 482257209500944878}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &6334731963736711760
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3910569792107461046}
+  m_GameObject: {fileID: 482257209500944878}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -85,13 +85,13 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2022187442344590474
-BoxCollider:
+--- !u!135 &2936047991883481422
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3910569792107461046}
+  m_GameObject: {fileID: 482257209500944878}
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -104,26 +104,24 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5137318609455784937
+--- !u!114 &8342759424825424172
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3910569792107461046}
+  m_GameObject: {fileID: 482257209500944878}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d69ddabb62ad14349a4b52a790d73a09, type: 3}
+  m_Script: {fileID: 11500000, guid: aed16bace8ef49b4cba09e41ac5be6a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HitstoDestroy: 1
-  CurrentHits: 0
-  PowerUps:
-  - {fileID: 482257209500944878, guid: 9bed71d18374ab844aedc5b7c9db512c, type: 3}
-  - {fileID: 482257209500944878, guid: d4b31f16d47b97b4c87f4d4a21e9d225, type: 3}
-  - {fileID: 390326509164464300, guid: 65c94f12ec9b82e459fe0a91abb962bd, type: 3}
-  powerUpChance: 25
-  Points: 1
-  hitParticlesPrefab: {fileID: 6564747395526651224, guid: 3a7d0a4510de461428da3b3924bb7a67, type: 3}
+  _fallSpeed: 8
+  _rotationSpeed: 0
+  _collisionHigth: -7.5
+  _destroyHeigth: 0
+  _playerMask:
+    serializedVersion: 2
+    m_Bits: 256

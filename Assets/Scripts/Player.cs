@@ -43,4 +43,10 @@ public class Player : IUpdateable
         --_currentLife;
         MatchStarted = false;
     }
+
+    public void IncreaseSize()
+    {
+        var scale = transform.localScale;
+        transform.localScale = new Vector3(scale.x + 0.75f, scale.y, scale.z);
+    }
 }

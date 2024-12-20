@@ -37,10 +37,10 @@ public class GameManager : MonoBehaviour
 
     }
 
-    public void MultiBall(IUpdateable multiball)
+    public void MultiBall(IUpdateable pwrup)
     {
         int currentBalls = ActiveBalls.Count;
-        Debug.Log(currentBalls);
+        //Debug.Log(currentBalls);
         for (int i = 0; i < currentBalls; i++)
         {
             var cloneI = i;
@@ -55,7 +55,25 @@ public class GameManager : MonoBehaviour
                 ball.StartMovement();
             }
         }
-        updateManager.RemoveUpdateable(multiball);
+        updateManager.RemoveUpdateable(pwrup);
+    }
+
+    public void BigBall(IUpdateable pwrup)
+    {
+        int currentBalls = ActiveBalls.Count;
+        for (int i = 0; i < currentBalls; i++)
+        {
+            var cloneI = i;
+            Ball ball = ActiveBalls[cloneI].GetComponent<Ball>();
+            ball.SetBigBall(3, 2);
+        }
+        updateManager.RemoveUpdateable(pwrup);
+    }
+
+    public void BigPaddle(IUpdateable pwrup)
+    {
+        player.IncreaseSize();
+        updateManager.RemoveUpdateable(pwrup);
     }
 
     public void AddToUpdateList(IUpdateable updateable)

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3634,7 +3634,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5472817366332289531, guid: 98e70cf8a5834964bafbe5d10c8e2ad5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.04
       objectReference: {fileID: 0}
     - target: {fileID: 5472817366332289531, guid: 98e70cf8a5834964bafbe5d10c8e2ad5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4444,6 +4444,22 @@ PrefabInstance:
       propertyPath: hitParticlesPrefab
       value: 
       objectReference: {fileID: 6564747395526651224, guid: 3a7d0a4510de461428da3b3924bb7a67, type: 3}
+    - target: {fileID: 5137318609455784937, guid: 98e70cf8a5834964bafbe5d10c8e2ad5, type: 3}
+      propertyPath: PowerUps.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5137318609455784937, guid: 98e70cf8a5834964bafbe5d10c8e2ad5, type: 3}
+      propertyPath: PowerUps.Array.data[0]
+      value: 
+      objectReference: {fileID: 482257209500944878, guid: 9bed71d18374ab844aedc5b7c9db512c, type: 3}
+    - target: {fileID: 5137318609455784937, guid: 98e70cf8a5834964bafbe5d10c8e2ad5, type: 3}
+      propertyPath: PowerUps.Array.data[1]
+      value: 
+      objectReference: {fileID: 482257209500944878, guid: d4b31f16d47b97b4c87f4d4a21e9d225, type: 3}
+    - target: {fileID: 5137318609455784937, guid: 98e70cf8a5834964bafbe5d10c8e2ad5, type: 3}
+      propertyPath: PowerUps.Array.data[2]
+      value: 
+      objectReference: {fileID: 390326509164464300, guid: 65c94f12ec9b82e459fe0a91abb962bd, type: 3}
     - target: {fileID: 5472817366332289531, guid: 98e70cf8a5834964bafbe5d10c8e2ad5, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.9899998
@@ -5379,6 +5395,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6905352415948333043, guid: 670053f21dba3984a89f12a992307f3f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905352415948333043, guid: 670053f21dba3984a89f12a992307f3f, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

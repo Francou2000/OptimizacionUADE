@@ -6,7 +6,7 @@ public class Block : MonoBehaviour
 {
     [SerializeField] int HitstoDestroy;
     [SerializeField] int CurrentHits;
-    [SerializeField] GameObject PowerUp;
+    [SerializeField] List<GameObject> PowerUps;
     [SerializeField] int powerUpChance;
     [SerializeField] public int Points;
     [SerializeField] GameObject hitParticlesPrefab;
@@ -37,14 +37,17 @@ public class Block : MonoBehaviour
         BlockBot = blockCollider.bounds.min.y;
     }
 
-    public void OnHit()
+    public void OnHit(int dmg)
     {
-        CurrentHits--;
+        CurrentHits -= dmg;
         if (CurrentHits <= 0)
         {
-            if (PowerUp && Random.Range(1, 101) < powerUpChance)
+            if (Random.Range(1, 101) < powerUpChance)
             {
-                GameObject powerUP = Instantiate(PowerUp, this.transform.position, PowerUp.transform.rotation);
+                int pwrUpIndex = Random.Range(0, PowerUps.Count);
+                Debug.Log(pwrUpIndex);
+                var SelectedPowerUp = PowerUps[pwrUpIndex];
+                GameObject powerUP = Instantiate(SelectedPowerUp, this.transform.position, SelectedPowerUp.transform.rotation);
                 GameManager.instance.AddToUpdateList(powerUP.GetComponent<MultiBall>());
             }
             DestroyBlock();

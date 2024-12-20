@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MultiBall : IUpdateable
+public abstract class Powerup : IUpdateable
 {
     [SerializeField] float _fallSpeed;
     [SerializeField] float _rotationSpeed;
@@ -11,7 +11,7 @@ public class MultiBall : IUpdateable
     [SerializeField] float _destroyHeigth;
     Collider[] cols = new Collider[1];
     [SerializeField] LayerMask _playerMask;
-
+    
     public override void CustomUpdate()
     {
         transform.position += new Vector3(0, -1, 0) * _fallSpeed * Time.deltaTime;
@@ -23,12 +23,13 @@ public class MultiBall : IUpdateable
             //Debug.Log(hit);
             if (hit >= 1)
             {
-                Debug.Log("MultiBAll");
-                GameManager.instance.MultiBall(this);
+                _powerup();
                 Destroy(gameObject);
             }
 
             if(transform.position.y <= _destroyHeigth) { Destroy(gameObject); }
         }
     }
+
+    protected abstract void _powerup();
 }

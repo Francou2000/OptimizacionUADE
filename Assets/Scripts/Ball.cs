@@ -15,6 +15,7 @@ public class Ball : IUpdateable
     public bool moving;
     GameObject player;
     Collider[] cols = new Collider[10];
+    private int damage = 1;
 
     void Start()
     {
@@ -57,7 +58,7 @@ public class Ball : IUpdateable
         if (block != null)
         {
             BlockCollision(block);
-            block.OnHit();
+            block.OnHit(damage);
             return;
         }
 
@@ -175,4 +176,12 @@ public class Ball : IUpdateable
         }
     }
 
+    public void SetBigBall(int newDmg, int sizeScale)
+    {
+        damage = newDmg;
+        var scale = transform.localScale;
+        transform.localScale = new Vector3(scale.x * 1.2f, scale.y * 1.2f, scale.z * 1.2f);
+        BallRadius *= 1.2f;
+        _movementSpeed *= 0.8f;
+    }
 }
